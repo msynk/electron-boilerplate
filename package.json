@@ -1,0 +1,25 @@
+{
+  "name": "electron-boilerplate",
+  "version": "1.0.0",
+  "description": "A basic boilerplate for electron-based projects",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msynk/electron-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msynk/electron-boilerplate/issues"
+  },
+  "homepage": "https://github.com/msynk/electron-boilerplate#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "*",
+    "electron": "^18.0.3"
+  }
+}
