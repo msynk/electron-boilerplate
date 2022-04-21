@@ -1,0 +1,51 @@
+const path = require('path')
+const { app, Tray, Menu, BrowserWindow } = require('electron')
+
+class Application {
+    root = null
+    window = null
+    tray = null
+
+    constructor(root) {
+        this.root = root
+        this.mainRoot = path.join(root, 'main')
+        this.rendererRoot = path.join(root, 'renderer')
+
+        this.tray = new Tray('static/icon.png')
+        this.tray.setToolTip('Electron boilerplate')
+        this.tray.setContextMenu(Menu.buildFromTemplate([
+            { label: 'Open', click: () => this.createWindow() },
+            { label: 'Close', click: () => app.quit() },
+        ]))
+
+        this.createWindow()
+    }
+
+    createWindow() {
+        if (this.window) {
+            return this.window.show()
+        }
+
+        this.window = new BrowserWindow({
+            width: 800,
+            height: 600,
+            webPreferences: {
+                preload: path.join(this.mainRoot, 'preload.js')
+            },
+            icon: 'static/icon.png'
+        })
+
+        this.window.loadFile(path.join(this.rendererRoot, 'index.html'))
+
+        this.window.on('close', e => {
+            this.window = null
+        })
+    }
+}
+
+Application.start = root => {
+    const application = new Application(root)
+    return application
+}
+
+module.exports = Application
