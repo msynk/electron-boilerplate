@@ -10,8 +10,9 @@ class Application {
         this.root = root
         this.mainRoot = path.join(root, 'main')
         this.rendererRoot = path.join(root, 'renderer')
+        this.staticRoot = path.join(root, '..', 'static')
 
-        this.tray = new Tray('static/icon.png')
+        this.tray = new Tray(path.join(this.staticRoot, 'icon.png'))
         this.tray.setToolTip('Electron boilerplate')
         this.tray.setContextMenu(Menu.buildFromTemplate([
             { label: 'Open', click: () => this.createWindow() },
@@ -32,7 +33,7 @@ class Application {
             webPreferences: {
                 preload: path.join(this.mainRoot, 'preload.js')
             },
-            icon: 'static/icon.png'
+            icon: path.join(this.staticRoot, 'icon.png')
         })
 
         this.window.loadFile(path.join(this.rendererRoot, 'index.html'))
